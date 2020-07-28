@@ -10,22 +10,19 @@ Before(function() {
   shouty = new Shouty()
 })
 
-Given('Lucy is at {int}, {int}', function (x, y) {
-  shouty.setLocation('Lucy', new Coordinate(x, y))
+Given('{word} is at {int}, {int}', function (person, x, y) {
+  shouty.setLocation(person, new Coordinate(x, y))
 })
 
-Given('Sean is at {int}, {int}', function (x, y) {
-  shouty.setLocation('Sean', new Coordinate(x, y))
+When('{word} shouts', function (shouter) {
+  shouty.shout(shouter, ARBITARY_MESSAGE)
 })
 
-When('Sean shouts', function () {
-  shouty.shout('Sean', ARBITARY_MESSAGE)
+Then('Lucy should hear {word}', function (shouter) {
+  assert(shouty.getShoutsHeardBy('Lucy').has(shouter))
 })
 
-Then('Lucy should hear Sean', function () {
-  assert.equal(shouty.getShoutsHeardBy('Lucy').size, 1)
-})
+Then('Lucy should not hear {word}', function (shouter) {
+  assert(!(shouty.getShoutsHeardBy('Lucy').has(shouter)))
+});
 
-Then('Lucy should hear nothing', function () {
-  assert.equal(shouty.getShoutsHeardBy('Lucy').size, 0)
-})
