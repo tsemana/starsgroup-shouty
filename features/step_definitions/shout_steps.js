@@ -4,42 +4,33 @@ const Shouty = require('../../lib/shouty')
 const Coordinate = require('../../lib/coordinate')
 
 const ARBITARY_MESSAGE = 'Hello, world'
-let shouty
-
-Before(function() {
-  shouty = new Shouty()
-})
-
-Given('{word} is at {int}, {int}', function (person, x, y) {
-  shouty.setLocation(person, new Coordinate(x, y))
-})
 
 When('{word} shouts', function (shouter) {
-  shouty.shout(shouter, ARBITARY_MESSAGE)
+  this.shouty.shout(shouter, ARBITARY_MESSAGE)
 })
 
 Then('Lucy should hear {word}', function (shouter) {
   if (shouter == 'nothing') {
-    assert.equal(shouty.getShoutsHeardBy('Lucy').size, 0)
+    assert.equal(this.shouty.getShoutsHeardBy('Lucy').size, 0)
   } else {
-    assert(shouty.getShoutsHeardBy('Lucy').has(shouter))
+    assert(this.shouty.getShoutsHeardBy('Lucy').has(shouter))
   }
 })
 
 Then('Lucy should not hear {word}', function (shouter) {
-  assert(!(shouty.getShoutsHeardBy('Lucy').has(shouter)))
+  assert(!(this.shouty.getShoutsHeardBy('Lucy').has(shouter)))
 });
 
 Then('she should not hear herself', function () {
-  assert(!(shouty.getShoutsHeardBy('Lucy').has('Lucy')))
+  assert(!(this.shouty.getShoutsHeardBy('Lucy').has('Lucy')))
 });
 
 Given('people are located at', function (dataTable) {
   dataTable.hashes().forEach(row => {
-    shouty.setLocation(row.name, new Coordinate(row.x, row.y))
+    this.shouty.setLocation(row.name, new Coordinate(row.x, row.y))
   })
 });
 
 Then('Lucy should hear {int} shout(s) from {word}', function (shouts, shouter) {
-  assert.equal(shouty.getShoutsHeardBy('Lucy').get(shouter).length, shouts)
+  assert.equal(this.shouty.getShoutsHeardBy('Lucy').get(shouter).length, shouts)
 });
