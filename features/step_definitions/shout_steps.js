@@ -1,5 +1,5 @@
 const assert = require('assert')
-const { Before, Given, When, Then } = require('cucumber')
+const { Before, Given, When, Then, After } = require('cucumber')
 const Shouty = require('../../lib/shouty')
 const Coordinate = require('../../lib/coordinate')
 
