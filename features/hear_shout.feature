@@ -25,10 +25,12 @@ Feature: Hear Shout
     Then Lucy should not hear Oscar
     But Lucy should hear Sean
 
+  @quiet
   Scenario: Shouter does not hear their shout
     When Lucy shouts
     Then she should not hear herself
 
+  @shush
   Scenario: Multiple shouts from one person
       And Sean is at 0, 500
       When Sean shouts
