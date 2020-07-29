@@ -19,7 +19,11 @@ When('{word} shouts', function (shouter) {
 })
 
 Then('Lucy should hear {word}', function (shouter) {
-  assert(shouty.getShoutsHeardBy('Lucy').has(shouter))
+  if (shouter == 'nothing') {
+    assert.equal(shouty.getShoutsHeardBy('Lucy').size, 0)
+  } else {
+    assert(shouty.getShoutsHeardBy('Lucy').has(shouter))
+  }
 })
 
 Then('Lucy should not hear {word}', function (shouter) {
