@@ -26,3 +26,7 @@ Then('Lucy should not hear {word}', function (shouter) {
   assert(!(shouty.getShoutsHeardBy('Lucy').has(shouter)))
 });
 
+Then('she should not hear herself', function () {
+  assert(!(shouty.getShoutsHeardBy('Lucy').has('Lucy')))
+});
+
