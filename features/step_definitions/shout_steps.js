@@ -34,3 +34,8 @@ Then('she should not hear herself', function () {
   assert(!(shouty.getShoutsHeardBy('Lucy').has('Lucy')))
 });
 
+Given('people are located at', function (dataTable) {
+  dataTable.hashes().forEach(row => {
+    shouty.setLocation(row.name, new Coordinate(row.x, row.y))
+  })
+});
